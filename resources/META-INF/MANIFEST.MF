@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Name: cn/cacaos/
+Implementation-Title: checkstyle-git-pre-commit
+Implementation-Version: 9.0
+Specification-Title: checkstyle-git-pre-commit
+Created-By: 1.8.0_191 (Oracle Corporation)
+Specification-Version: 9.0
+Class-Path: lib/checkstyle.jar
+Main-Class: cn.cacaos.ojer.Main
