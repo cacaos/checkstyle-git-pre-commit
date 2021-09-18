@@ -1,0 +1,46 @@
+#!/bin/sh
+
+echo '-------------Code Style Checking-------------'
+
+check_filepath=$(git config --get checkstyle.checksFile)
+jar_filepath=$(git config --get checkstyle.checksJar)
+result_warn_sum=0
+result_err_sum=0
+warn_str="[WARN]"
+error_str="[ERROR]"
+java_files=$(git diff-index --cached HEAD --name-only | grep .java)
+if [ ! -n "$java_files" ]; then
+    exit 0
+fi
+
+java_file_arr=($java_files)
+
+echo ${CLASSPATH}
+for i in "${!java_file_arr[@]}"; do
+    echo "java -jar $jar_filepath -c $check_filepath ${java_file_arr[i]}"
+    result=$(java -jar $jar_filepath -c $check_filepath ${java_file_arr[i]})
+    echo $result
+    if [[ "${result[@]}" =~ "${warn_str}" ]]; then
+        ((result_warn_sum += 1))
+    fi
+
+    if [[ "${result[@]}" =~ "${error_str}" ]]; then
+        ((result_err_sum += 1))
+    fi
+done
+
+if (( result_warn_sum > 0 || result_err_sum > 0 ))
+    echo ''
+    echo ''
+    echo '-------------You must fix the errors and warnings first, then execute commit command again-------------'
+    echo ''
+    echo ''
+then
+    exit 1
+fi
+echo ''
+echo ''
+echo '-------------Checkstyle success-------------'
+echo ''
+echo ''
+exit 0
