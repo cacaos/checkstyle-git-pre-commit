@@ -15,9 +15,8 @@ fi
 
 java_file_arr=($java_files)
 
-echo ${CLASSPATH}
 for i in "${!java_file_arr[@]}"; do
-    echo "java -jar $jar_filepath -c $check_filepath ${java_file_arr[i]}"
+#    echo "java -jar $jar_filepath -c $check_filepath ${java_file_arr[i]}"
     result=$(java -jar $jar_filepath -c $check_filepath ${java_file_arr[i]})
     echo $result
     if [[ "${result[@]}" =~ "${warn_str}" ]]; then

@@ -79,6 +79,7 @@ public abstract class CheckstyleConfig {
             if (checksFile.contains(projectPath)) {
                 checksFile = checksFile.replace(projectPath, "");
                 checksFile = checksFile.replaceAll("\\\\", "/");
+                checksFile = "." + checksFile;
                 PrintUtils.info("checks: CUSTOM " + checksFile);
             } else {
                 PrintUtils.err("checks: CUSTOM " + checksFile);
