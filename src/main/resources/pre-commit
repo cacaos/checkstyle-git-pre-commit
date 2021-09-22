@@ -16,7 +16,7 @@ fi
 java_file_arr=($java_files)
 
 for i in "${!java_file_arr[@]}"; do
-#    echo "java -jar $jar_filepath -c $check_filepath ${java_file_arr[i]}"
+    git add ${java_file_arr[i]}
     result=$(java -jar $jar_filepath -c $check_filepath ${java_file_arr[i]})
     echo $result
     if [[ "${result[@]}" =~ "${warn_str}" ]]; then
@@ -29,12 +29,12 @@ for i in "${!java_file_arr[@]}"; do
 done
 
 if (( result_warn_sum > 0 || result_err_sum > 0 ))
+then
     echo ''
     echo ''
     echo '-------------You must fix the errors and warnings first, then execute commit command again-------------'
     echo ''
     echo ''
-then
     exit 1
 fi
 echo ''
