@@ -1,7 +1,5 @@
 package com.puppycrawl.tools.checkstyle.plugin.git;
 
-import com.puppycrawl.tools.checkstyle.utils.PrintUtils;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
